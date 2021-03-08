@@ -62,5 +62,37 @@ public class PersonController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/update")
+    public ResponseEntity<Response> update(@RequestBody PersonRequest request) {
+        Boolean result = this.personService.update(request);
+        if(!result){
+            response = new Response(false, "Failed update data", false);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        response = new Response(result, "Data update successfully", true);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/update-return-value")
+    public ResponseEntity<Response> updateReturnValue(@RequestBody PersonRequest request) {
+        PersonDto result = this.personService.updateReturnValue(request);
+        if(ObjectUtils.isEmpty(result)){
+            response = new Response(false, "Failed update data", false);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        response = new Response(result, "Data update successfully", true);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Response> delete(@PathVariable Integer id){
+        Boolean result = this.personService.delete(id);
+        if(!result){
+            response = new Response(false, "Failed delete data", false);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        response = new Response(result, "Data delete successfully", true);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

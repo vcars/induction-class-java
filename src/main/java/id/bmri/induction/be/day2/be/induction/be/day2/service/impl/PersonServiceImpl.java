@@ -69,7 +69,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Boolean create(PersonRequest request) {
 
-        validate(request);
+        validate(request,true);
         Random rand = new Random();
         PersonDto personDto = new PersonDto(rand.nextInt(100),request.getNama(),request.getUmur());
 
@@ -79,16 +79,40 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDto createReturnValue(PersonRequest request) {
 
-        validate(request);
+        validate(request,true);
 
         Random rand = new Random();
 
         return new PersonDto(rand.nextInt(100),request.getNama(),request.getUmur());
     }
 
+    @Override
+    public Boolean update(PersonRequest request) {
+       validate(request,false);
+        PersonDto personDto = getDetail(request.getId());
 
+        personDto.setNama(request.getNama());
+        personDto.setUmur(request.getUmur());
 
-    private void validate(PersonRequest request){
+        return true;
+    }
+
+    @Override
+    public PersonDto updateReturnValue(PersonRequest request) {
+        validate(request,false);
+        PersonDto personDto = getDetail(request.getId());
+        personDto.setNama(request.getNama());
+        personDto.setUmur(request.getUmur());
+        return personDto;
+    }
+
+    private void validate(PersonRequest request,Boolean isCreate){
+
+        if(!isCreate){
+            if (ObjectUtils.isEmpty(request.getId())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"ID is Mandatory");
+            }
+        }
 
             if (ObjectUtils.isEmpty(request.getNama())) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Nama is Mandatory");
@@ -101,5 +125,15 @@ public class PersonServiceImpl implements PersonService {
 
     }
 
+    @Override
+    public Boolean delete(Integer id) {
 
+        if (ObjectUtils.isEmpty(id)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"ID is Mandatory");
+        }
+
+        getDetail(id);
+
+        return true;
+    }
 }

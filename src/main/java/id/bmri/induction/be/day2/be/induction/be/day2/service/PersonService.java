@@ -11,4 +11,8 @@ public interface PersonService {
     PersonDto getDetail(int id);
     Boolean create(PersonRequest request);
     PersonDto createReturnValue(PersonRequest request);
+    Boolean update(PersonRequest request);
+    PersonDto updateReturnValue(PersonRequest request);
+    Boolean delete(Integer id);
+
 }
