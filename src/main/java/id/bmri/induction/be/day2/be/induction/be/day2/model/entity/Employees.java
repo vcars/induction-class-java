@@ -59,6 +59,4 @@ public class Employees {
     @JsonBackReference
     private JobHistory jobHistory;
 
-    @Transient
-    private String jobTitle;
 }
