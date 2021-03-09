@@ -2,11 +2,9 @@ package id.bmri.induction.be.day2.be.induction.be.day2.model.dto;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-
 @Data
-public class EmployeesDto {
+public class EmployeeDepartmenNameDto {
+
     private String firstName;
 
     private String lastName;
@@ -15,9 +13,7 @@ public class EmployeesDto {
 
     private String phoneNumber;
 
-    private Timestamp hireDate;
-
-    private Integer salary;
+    private String departmentName;
 
 
 }

@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface JobsService {
 
-    List<JobsDto> searchJobBySalary(BigDecimal minSalary , BigDecimal maxSalary);
+    void mergeFromEmployee();
+
 }

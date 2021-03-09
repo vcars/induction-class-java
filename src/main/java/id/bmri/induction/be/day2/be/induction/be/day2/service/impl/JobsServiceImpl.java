@@ -5,7 +5,9 @@ import id.bmri.induction.be.day2.be.induction.be.day2.model.entity.Jobs;
 import id.bmri.induction.be.day2.be.induction.be.day2.repository.JobsRepository;
 import id.bmri.induction.be.day2.be.induction.be.day2.service.JobsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,13 +19,17 @@ public class JobsServiceImpl implements JobsService {
     @Autowired
     JobsRepository jobsRepository;
 
+
     @Override
-    public List<JobsDto> searchJobBySalary(BigDecimal minSalary, BigDecimal maxSalary) {
-    List<Jobs> jobs = jobsRepository.searchJobsBySalary(minSalary, maxSalary);
-    if (jobs.isEmpty()) {
-        return  null;
-    }
-    return jobs.stream().map(this::getFetchToDto).collect(Collectors.toList());
+    public void mergeFromEmployee() {
+        try {
+            this.jobsRepository.mergeDataFromEmployee();
+        }
+        catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Something went wrong");
+        }
+
     }
 
     private JobsDto getFetchToDto (Jobs mapper) {

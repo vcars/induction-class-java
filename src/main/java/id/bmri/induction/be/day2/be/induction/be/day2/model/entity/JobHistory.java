@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "job_history" , indexes = {
-        @Index(name = "JOBS_HISTORY_INDX_0", columnList = "employee_id")
-})
+@Table(name = "job_history")
 @Data
 public class JobHistory {
 
@@ -27,6 +25,5 @@ public class JobHistory {
 
     @Column(name = "department_id")
     private Integer departmentId;
-
 
 }

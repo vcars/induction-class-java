@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Data
@@ -38,10 +37,10 @@ public class Employees {
     private String jobId;
 
     @Column(name="salary")
-    private BigDecimal salary;
+    private Integer salary;
 
     @Column(name="commission_pct")
-    private BigDecimal commission_pct;
+    private Integer commission_pct;
 
     @Column(name="manager_id")
     private Integer managerId;
@@ -49,14 +48,16 @@ public class Employees {
     @Column(name = "department_id")
     private Integer departmentId;
 
-    @OneToOne(cascade = CascadeType.DETACH)
+    @Column(name="commistion_pct")
+    private Integer commistionPct;
+
+    @OneToOne
     @JoinColumn(name = "job_id", referencedColumnName = "job_id" , insertable = false,updatable = false)
-    @JsonBackReference
     private Jobs jobs;
 
-    @OneToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id" , insertable = false,updatable = false)
-    @JsonBackReference
-    private JobHistory jobHistory;
+    @OneToOne
+    @JoinColumn(name = "department_id", referencedColumnName = "department_id" , insertable = false,updatable = false)
+    private Departments departments;
+
 
 }

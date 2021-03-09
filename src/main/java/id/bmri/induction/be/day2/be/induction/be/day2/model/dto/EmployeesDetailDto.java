@@ -18,16 +18,12 @@ public class EmployeesDetailDto {
 
     private Timestamp hireDate;
 
-    private BigDecimal salary;
+    private Integer salary;
 
     private String jobTitle;
 
-    private BigDecimal minSalary;
+    private Integer minSalary;
 
-    private BigDecimal maxSalary;
-
-    private Timestamp startDate;
-
-    private Timestamp endDate;
+    private Integer maxSalary;
 
 }

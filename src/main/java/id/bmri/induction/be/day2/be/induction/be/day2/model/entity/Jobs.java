@@ -1,5 +1,6 @@
 package id.bmri.induction.be.day2.be.induction.be.day2.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,10 +21,10 @@ public class Jobs {
     private String jobTitle;
 
     @Column(name = "min_salary")
-    private BigDecimal minSalary;
+    private Integer minSalary;
 
     @Column(name = "max_salary")
-    private BigDecimal maxSalary;
+    private Integer maxSalary;
 
 
 }

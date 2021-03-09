@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 public class JobsDto {
 
     private String jobTitle;
-    private BigDecimal minSalary;
-    private BigDecimal maxSalary;
+    private Integer minSalary;
+    private Integer maxSalary;
 }
